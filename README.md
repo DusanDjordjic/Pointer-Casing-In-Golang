@@ -47,3 +47,35 @@ To run them you need to have gcc and go and make installed.
 
 - Run C example by typing `make c`
 - Run GO example by typing `make go`
+
+## From reflect/value.go
+
+```go
+// StringHeader is the runtime representation of a string.
+// It cannot be used safely or portably and its representation may
+// change in a later release.
+// Moreover, the Data field is not sufficient to guarantee the data
+// it references will not be garbage collected, so programs must keep
+// a separate, correctly typed pointer to the underlying data.
+//
+// Deprecated: Use unsafe.String or unsafe.StringData instead.
+type StringHeader struct {
+	Data uintptr
+	Len  int
+}
+
+// SliceHeader is the runtime representation of a slice.
+// It cannot be used safely or portably and its representation may
+// change in a later release.
+// Moreover, the Data field is not sufficient to guarantee the data
+// it references will not be garbage collected, so programs must keep
+// a separate, correctly typed pointer to the underlying data.
+//
+// Deprecated: Use unsafe.Slice or unsafe.SliceData instead.
+type SliceHeader struct {
+	Data uintptr
+	Len  int
+	Cap  int
+}
+
+```

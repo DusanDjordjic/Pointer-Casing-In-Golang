@@ -16,18 +16,17 @@ func main() {
 	fmt.Println("===== C Example ===========")
 	cExample()
 	fmt.Println("===========================")
-	fmt.Println("===== Another Example =====")
-	anotherExample()
+	fmt.Println("===== Safer Example =======")
+	saferExample()
 	fmt.Println("===========================")
 	fmt.Println("===== JSON Example ========")
 	jsonExample()
 	fmt.Println("===========================")
 }
 
-// This may be better way of doing it, because they can change how strings or slices are
-// represented underneath but that would be a breaking change
-// so the casing will probably work until go 2.0
-func anotherExample() {
+// This is a safer way of doing it, because they can change how strings or slices are
+// represented underneath as its mentioned in reflect/value.go
+func saferExample() {
 	{
 		buffer := make([]byte, 0, 10)
 		buffer = append(buffer, 'A', 'B', 'C', 0)
