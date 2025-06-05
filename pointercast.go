@@ -13,15 +13,64 @@ type User struct {
 }
 
 func main() {
-	cExmaple()
+	fmt.Println("===== C Example ===========")
+	cExample()
+	fmt.Println("===========================")
+	fmt.Println("===== Another Example =====")
+	anotherExample()
+	fmt.Println("===========================")
+	fmt.Println("===== JSON Example ========")
+	jsonExample()
+	fmt.Println("===========================")
 }
 
-func cExmaple() {
+// This may be better way of doing it, because they can change how strings or slices are
+// represented underneath but that would be a breaking change
+// so the casing will probably work until go 2.0
+func anotherExample() {
+	{
+		buffer := make([]byte, 0, 10)
+		buffer = append(buffer, 'A', 'B', 'C', 0)
+		// strings in go do not need 0 at the end but we are keeping it to
+		// have the same output as C code
+
+		l := len(buffer)
+		bytes := unsafe.SliceData(buffer)
+		s := unsafe.String(bytes, l)
+
+		fmt.Printf("\"%s\" %d\n", s, len(s))
+
+		buffer[2] = 'D'
+		fmt.Printf("\"%s\" %d\n", s, len(s))
+
+	}
+
+	{
+		buffer := []byte{65, 66, 67}
+
+		l := len(buffer)
+		bytes := unsafe.SliceData(buffer)
+		s := unsafe.String(bytes, l)
+
+		fmt.Printf("\"%s\" %d\n", s, len(s))
+	}
+
+	{
+		var buffer []byte = nil
+
+		l := len(buffer)
+		bytes := unsafe.SliceData(buffer)
+		s := unsafe.String(bytes, l)
+
+		fmt.Printf("\"%s\" %d\n", s, len(s))
+	}
+}
+
+func cExample() {
 	buffer := make([]byte, 0, 10)
-	buffer = append(buffer, 'A')
-	buffer = append(buffer, 'B')
-	buffer = append(buffer, 'C')
-	buffer = append(buffer, 0)
+	buffer = append(buffer, 'A', 'B', 'C', 0)
+	// strings in go do not need 0 at the end but we are keeping it to
+	// have the same output as C code
 
 	s := *(*string)(unsafe.Pointer(&buffer))
 	fmt.Printf("\"%s\" %d\n", s, len(s))
