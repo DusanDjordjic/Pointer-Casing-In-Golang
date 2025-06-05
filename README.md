@@ -41,7 +41,7 @@ It's better to use some of the built in functions from the unsafe package in gol
 
 ## Examples
 
-You can find examples in Go and C located in pointercast.go and pointercast.c respectively.
+You can find examples in Go and C located in pointercast.go and pointercast.c respectively. **Take a look at json example using strings.Builder type**
 
 To run them you need to have gcc and go and make installed. 
 

@@ -96,6 +96,13 @@ func jsonExample() {
 	s = (*string)(unsafe.Pointer(&data))
 	fmt.Printf("\"%s\" %d %d %d\n", *s, len(*s), len(data), cap(data))
 
+	// Its possible to use strings.Builder beacuse it implements Write
+	// and the data is casted to string underneath using unsafe.
+	//
+	// func (b *Builder) String() string {
+	// 	return unsafe.String(unsafe.SliceData(b.buf), len(b.buf))
+	// }
+
 	b := strings.Builder{}
 	json.NewEncoder(&b).Encode(users)
 	ss := b.String()
