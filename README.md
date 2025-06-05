@@ -37,6 +37,8 @@ To be more precise, you can cast anything to anything, but how the memory will b
 
 > Note: Casing back from string to []byte would just need from you to set the capacity to be the same as length.
 
+It's better to use some of the built in functions from the unsafe package in golang then to do the casting manually but it works either way (see pointercast.go for examples).
+
 ## Examples
 
 You can find examples in Go and C located in pointercast.go and pointercast.c respectively.
