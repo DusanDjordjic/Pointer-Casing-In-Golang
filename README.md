@@ -4,7 +4,7 @@ Most of the time doing `string(buffer)` where buffer is `[]byte` is fine but eve
 
 Golang provides the unsafe package which we can use for casting pointers, so we can cast []byte (which has the pointer underneath) to a string but we have to know the memory layout of both of them.
 
-### Why this works
+### How and why this works
 
 []byte is a slice of bytes and all slices in go have 3 things: Pointer to the allocated memory, length, and capacity. Slices are mutable and we can use append, for example, to extend them. We could say that []byte looks something like this:
 
